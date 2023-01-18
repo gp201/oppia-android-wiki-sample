@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
       - name: Add remote
         run: |
-        git filter-branch --subdirectory-filter wiki/ -- -- all
-        git remote set-url origin https://github.com/${{github.repository_owner}}/oppia-android.wiki.git
-        git checkout -b master
-        git push origin master --force
+          git filter-branch --subdirectory-filter wiki/ -- -- all
+          git remote set-url origin https://github.com/gp201/oppia-android.wiki.git
+          git checkout -b master
+          git push origin master --force
