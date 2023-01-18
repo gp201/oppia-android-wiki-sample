@@ -1,0 +1,25 @@
+# Contains jobs corresponding to build tests (such as verifying that certain targets build, including the app itself).
+
+name: Deploy to Wiki
+on:
+  push:
+    branches:
+      - develop
+  gollum:
+
+jobs:
+  wiki-deploy:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Add remote
+        run: |
+        git filter-branch --subdirectory-filter wiki/ -- -- all
+        git remote set-url origin https://github.com/${{github.repository_owner}}/oppia-android.wiki.git
+        git checkout -b master
+        git push origin master --force
